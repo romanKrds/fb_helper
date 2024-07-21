@@ -1,0 +1,30 @@
+<div class="p-4 bg-gray-100">
+  <h2 class="text-xl font-bold mb-3">Preview your Post</h2>
+  <p class="text-lg mb-3">You can edit the text directly in preview.</p>
+
+  <div class="mt-10">
+    <app-fb-post-card
+      class="max-w-2xl mx-auto"
+      [isLoading]="isLoading()"
+      (send)="toggleConfirmationDialog()"
+    >
+      @if (content) {
+        <div
+          editable="true"
+          propValueAccessor="innerHTML"
+          [formControl]="revisedContent"
+          class="max-h-52 overflow-y-auto"
+        ></div>
+      } @else {
+        <p>You will see the post here as soon as you submit your transcript.</p>
+      }
+    </app-fb-post-card>
+  </div>
+</div>
+
+@if (confirmChanges()) {
+  <app-confirm-send
+    [content]="revisedContent.value"
+    (confirm)="toggleConfirmationDialog()"
+  ></app-confirm-send>
+}

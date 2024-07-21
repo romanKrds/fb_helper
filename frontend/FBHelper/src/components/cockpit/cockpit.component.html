@@ -1,0 +1,17 @@
+<div class="p-4">
+  <h2 class="text-xl font-bold mb-3">Upload your Transcript</h2>
+  <form class="flex flex-col p-2 rounded-lg shadow-md" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <textarea
+      formControlName="content"
+      class="w-full p-2 border rounded-lg h-80"
+      rows="5"
+      placeholder="Drop the transcript here..."></textarea>
+
+    <button
+      type="submit"
+      class="self-end mt-2 px-4 py-2 rounded-lg text-white bg-blue-500 disabled:bg-gray-300"
+      [disabled]="isLoading || form.invalid">
+      Submit
+    </button>
+  </form>
+</div>

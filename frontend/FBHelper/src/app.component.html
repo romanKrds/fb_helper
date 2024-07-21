@@ -1,0 +1,14 @@
+<app-page>
+  <section class="flex justify-center flex-wrap h-full w-full px-10">
+    <app-cockpit
+      class="flex-grow max-w-screen-md basis-1/2"
+      [isLoading]="isLoading()"
+      (transform)="onTransformTranscript($event)"
+    ></app-cockpit>
+
+    <app-preview
+      class="flex-grow max-w-screen-md basis-1/2"
+      [content]="markdown$ | async"
+    ></app-preview>
+  </section>
+</app-page>

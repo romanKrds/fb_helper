@@ -4,7 +4,6 @@ from openai import OpenAI
 client = OpenAI()
 bp = Blueprint('assistant', __name__, url_prefix='/assistant')
 
-
 @bp.post('/transcript-to-post')
 def transcript_to_post():
     transcript = request.json.get('transcript')
