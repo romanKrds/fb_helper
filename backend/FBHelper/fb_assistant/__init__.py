@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from openai import OpenAI
 
-client = OpenAI()
+openai_client = OpenAI()
 bp = Blueprint('assistant', __name__, url_prefix='/assistant')
 
 @bp.post('/transcript-to-post')
@@ -9,12 +9,12 @@ def transcript_to_post():
     transcript = request.json.get('transcript')
 
     if transcript is None:
-        return {"error": "No transcript provided"}, 400
+        return {"message": "No transcript provided"}, 400
 
     # TODO: Sanitize the transcript once its structure is known
 
     try:
-        completion = client.chat.completions.create(
+        completion = openai_client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {
@@ -79,5 +79,5 @@ def transcript_to_post():
                 return {"message": "Assistant failed while processing the request"}, 400
 
     except Exception as e:
-        return {"error": str(e)}, 500
+        return {"message": str(e)}, 500
 

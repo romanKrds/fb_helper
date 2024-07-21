@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, signal } from '@angular/core';
-import { delay, finalize, map, Observable } from "rxjs";
+import { catchError, delay, EMPTY, finalize, map, Observable, of } from "rxjs";
 import { TransformResponse } from "../interfaces/transform-response.interface";
 import { API_URL } from "../tokens";
 
@@ -24,12 +24,16 @@ export class AssistantService {
     this.isLoading.set(true);
     const url = `${this.apiUrl}/assistant/transcript-to-post`
 
-    // TODO: catch errors
     return this.http.post<TransformResponse>(url, {transcript}, {headers: HEADERS} )
       .pipe(
         delay(2000),
         map(resp => resp.message),
         finalize(() => this.isLoading.set(false)),
+        catchError(({error}) => {
+          alert(error.message);
+
+          return EMPTY
+        })
       )
   }
 }

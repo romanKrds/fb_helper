@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 
 @Component({
@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angula
   imports: [ReactiveFormsModule],
   templateUrl: './cockpit.component.html',
 })
-export class CockpitComponent implements OnInit {
+export class CockpitComponent {
   @Input() isLoading: boolean = false;
   @Output() transform = new EventEmitter<string>;
 
@@ -17,10 +17,6 @@ export class CockpitComponent implements OnInit {
     this.form = this.fb.group({
       content: ['', Validators.required]
     });
-  }
-
-  ngOnInit() {
-
   }
 
   onSubmit() {
